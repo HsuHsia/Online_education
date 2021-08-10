@@ -7,6 +7,7 @@ import com.hsu.commonutils.R;
 import com.hsu.edu_service.entity.EduTeacher;
 import com.hsu.edu_service.entity.vo.TeacherQuery;
 import com.hsu.edu_service.service.EduTeacherService;
+import com.hsu.servicebase.exceptionhandler.SummerException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,6 +36,11 @@ public class EduTeacherController {
     @GetMapping("findAll")
     public R findAll() {
         List<EduTeacher> list = teacherService.list(null);
+        try {
+            int i = 10 / 0;
+        }catch (Exception e) {
+            throw new SummerException(2001, "密码错误");
+        }
         return R.ok().data("teacher", list);
     }
 
