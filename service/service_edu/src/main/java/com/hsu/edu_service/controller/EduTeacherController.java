@@ -27,7 +27,8 @@ import java.util.List;
  */
 @Api(tags = "讲师管理")
 @RestController
-@RequestMapping("/edu_service/teacher")
+@RequestMapping("/eduservice/teacher")
+@CrossOrigin
 public class EduTeacherController {
     @Resource
     private EduTeacherService teacherService;
@@ -37,16 +38,15 @@ public class EduTeacherController {
     public R findAll() {
         List<EduTeacher> list = teacherService.list(null);
         try {
-            int i = 10 / 0;
+            int i = 10 / 1;
         }catch (Exception e) {
             throw new SummerException(2001, "密码错误");
         }
         return R.ok().data("teacher", list);
     }
 
-
     @ApiOperation(value = "逻辑删除讲师")
-    @DeleteMapping ("{id}")
+    @DeleteMapping ("deleteTeacher/{id}")
     public R removeTeacher(
             @ApiParam(name = "id",value = "讲师id",required = true) //提示信息
             @PathVariable String id) {
@@ -67,7 +67,7 @@ public class EduTeacherController {
         teacherService.page(teacherPage);
         long total = teacherPage.getTotal();
         List<EduTeacher> records = teacherPage.getRecords();
-        return R.ok().data("total", total).data("rows", records);
+        return R.ok().data("total", total).data("items", records);
     }
 
 
@@ -90,10 +90,11 @@ public class EduTeacherController {
         if (!StringUtils.isEmpty(level)) wrapper.eq("level", level);
         if (!StringUtils.isEmpty(beginTime)) wrapper.ge("gmt_create", beginTime);
         if (!StringUtils.isEmpty(endTime)) wrapper.le("gmt_create", endTime);
+        wrapper.orderByDesc("gmt_create");
         teacherService.page(teacherPage, wrapper);
         long total = teacherPage.getTotal();
         List<EduTeacher> records = teacherPage.getRecords();
-        return R.ok().data("total", total).data("rows", records);
+        return R.ok().data("total", total).data("items", records);
     }
 
 
