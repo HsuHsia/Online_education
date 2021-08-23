@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="service_edu" />
+        <module name="service_oss" />
         <module name="common_utils" />
         <module name="service_base" />
       </profile>
@@ -18,6 +19,7 @@
       <module name="service" target="8" />
       <module name="service_base" target="8" />
       <module name="service_edu" target="8" />
+      <module name="service_oss" target="8" />
       <module name="summer_parent" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -28,6 +30,7 @@
       <module name="service" options="-parameters" />
       <module name="service_base" options="-parameters" />
       <module name="service_edu" options="-parameters" />
+      <module name="service_oss" options="-parameters" />
     </option>
   </component>
 </project>

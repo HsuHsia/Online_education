@@ -27,7 +27,7 @@
         <swagger.version>2.9.2</swagger.version>
         <aliyun.oss.version>3.10.0</aliyun.oss.version>
         <jodatime.version>2.10.6</jodatime.version>
-        <poi.version>4.1.2</poi.version>
+        <poi.version>3.17</poi.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-io.version>2.7</commons-io.version>
         <httpclient.version>4.5.12</httpclient.version>
@@ -172,11 +172,6 @@
                 <version>${aliyun-java-sdk-core.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun-sdk-oss.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-vod</artifactId>

@@ -27,7 +27,7 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
 //        代码输出目录
-        gc.setOutputDir("D:\\JavaProject\\Online Education Project\\summer_parent\\service\\service_edu" + "/src/main/java");
+        gc.setOutputDir("D:\\JavaProject\\OnlineEducationProject\\summer_parent\\service\\service_edu" + "/src/main/java");
         gc.setAuthor("HsuHsia");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
@@ -60,7 +60,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
 //        这里是数据库的表名   多张表用逗号链接strategy.setInclude("edu_teacher","edu_teacher","edu_teacher");
-        strategy.setInclude("edu_teacher");
+        strategy.setInclude("edu_subject");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
