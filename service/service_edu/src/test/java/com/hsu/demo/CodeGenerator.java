@@ -59,8 +59,9 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-//        这里是数据库的表名   多张表用逗号链接strategy.setInclude("edu_teacher","edu_teacher","edu_teacher");
-        strategy.setInclude("edu_subject");
+//        这里是数据库的表名   多张表用逗号链接
+        strategy.setInclude("edu_chapter","edu_course","edu_video","edu_course_description");
+//        strategy.setInclude("edu_subject");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 

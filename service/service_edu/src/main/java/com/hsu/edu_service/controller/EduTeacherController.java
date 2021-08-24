@@ -34,7 +34,7 @@ public class EduTeacherController {
     private EduTeacherService teacherService;
 
     @ApiOperation(value = "所有讲师列表")
-    @GetMapping("findAll")
+    @GetMapping("/findAll")
     public R findAll() {
         List<EduTeacher> list = teacherService.list(null);
         try {
@@ -46,7 +46,7 @@ public class EduTeacherController {
     }
 
     @ApiOperation(value = "逻辑删除讲师")
-    @DeleteMapping ("deleteTeacher/{id}")
+    @DeleteMapping ("/deleteTeacher/{id}")
     public R removeTeacher(
             @ApiParam(name = "id",value = "讲师id",required = true) //提示信息
             @PathVariable String id) {
@@ -106,14 +106,14 @@ public class EduTeacherController {
     }
 
     @ApiOperation(value = "根据id查询讲师")
-    @GetMapping("getTeacher/{id}")
+    @GetMapping("/getTeacher/{id}")
     public R getTeacher(@PathVariable String id) {
         EduTeacher teacher = teacherService.getById(id);
         return R.ok().data("teacher", teacher);
     }
 
     @ApiOperation(value = "修改讲师信息")
-    @PostMapping("updateTeacher")
+    @PostMapping("/updateTeacher")
     public R updateTeacher(@RequestBody EduTeacher teacher) {
         boolean flag = teacherService.updateById(teacher);
         return flag ? R.ok() : R.error();
