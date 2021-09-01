@@ -3,6 +3,7 @@ package com.hsu.edu_service.service;
 import com.hsu.edu_service.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hsu.edu_service.entity.vo.CourseInfoVo;
+import com.hsu.edu_service.entity.vo.CoursePublishVo;
 
 /**
  * <p>
@@ -14,5 +15,12 @@ import com.hsu.edu_service.entity.vo.CourseInfoVo;
  */
 public interface EduCourseService extends IService<EduCourse> {
 
-    void saveCourseInfo(CourseInfoVo courseInfoVo);
+    String saveCourseInfo(CourseInfoVo courseInfoVo);
+
+    // 根据课程id查询课程的基本信息
+    CourseInfoVo getCourseInfo(String courseId);
+
+    void updateByCourseId(CourseInfoVo courseInfoVo);
+
+    CoursePublishVo getPublishCourseInfo(String courseId);
 }
