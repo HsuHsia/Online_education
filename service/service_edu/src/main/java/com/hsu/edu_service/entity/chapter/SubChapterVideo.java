@@ -1,5 +1,6 @@
 package com.hsu.edu_service.entity.chapter;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data

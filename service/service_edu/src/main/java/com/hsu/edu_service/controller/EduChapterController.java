@@ -36,29 +36,30 @@ public class EduChapterController {
         return R.ok().data("list", list);
     }
 
+
     // 添加章节
-    @PostMapping("addChapter")
+    @PostMapping("/addChapter")
     public R addChapter(@RequestBody EduChapter chapter) {
         chapterService.save(chapter);
         return R.ok();
     }
 
     // 根据id查询章节
-    @GetMapping("getChapterInfo/{chapterId}")
+    @GetMapping("/getChapterInfo/{chapterId}")
     public R getChapterInfo(@PathVariable String chapterId) {
         EduChapter chapter = chapterService.getById(chapterId);
         return R.ok().data("chapter", chapter);
     }
 
     // 修改章节
-    @PostMapping("updateChapter")
+    @PostMapping("/updateChapter")
     public R updateChapter(@RequestBody EduChapter chapter) {
         chapterService.updateById(chapter);
         return R.ok();
     }
 
     // 根据章节id删除章节
-    @DeleteMapping("deleteChapter/{chapterId}")
+    @DeleteMapping("/deleteChapter/{chapterId}")
     public R deleteChapter(@PathVariable String chapterId){
         boolean flag = chapterService.deleteChapterById(chapterId);
         return flag ? R.ok() : R.error();

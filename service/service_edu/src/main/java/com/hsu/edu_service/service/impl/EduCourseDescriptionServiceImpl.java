@@ -1,5 +1,6 @@
 package com.hsu.edu_service.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hsu.edu_service.entity.EduCourseDescription;
 import com.hsu.edu_service.mapper.EduCourseDescriptionMapper;
 import com.hsu.edu_service.service.EduCourseDescriptionService;
