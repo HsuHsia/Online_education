@@ -1,9 +1,15 @@
 package com.hsu.edu_service.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hsu.edu_service.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hsu.edu_service.entity.vo.CourseInfoVo;
 import com.hsu.edu_service.entity.vo.CoursePublishVo;
+import com.hsu.edu_service.entity.vo.frontVo.CourseFrontVo;
+import com.hsu.edu_service.entity.vo.frontVo.CourseWebVo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -25,4 +31,10 @@ public interface EduCourseService extends IService<EduCourse> {
     CoursePublishVo getPublishCourseInfo(String courseId);
 
     void removeCourseById(String courseId);
+
+    List<EduCourse> getHotCourse();
+
+    Map<String, Object> getCourseFrontList(Page<EduCourse> page, CourseFrontVo courseFrontVo);
+
+    CourseWebVo getFrontCourseInfo(String courseId);
 }

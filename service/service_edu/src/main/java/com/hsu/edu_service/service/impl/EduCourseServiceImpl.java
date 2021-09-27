@@ -1,9 +1,14 @@
 package com.hsu.edu_service.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hsu.edu_service.entity.EduCourse;
 import com.hsu.edu_service.entity.EduCourseDescription;
+import com.hsu.edu_service.entity.EduTeacher;
 import com.hsu.edu_service.entity.vo.CourseInfoVo;
 import com.hsu.edu_service.entity.vo.CoursePublishVo;
+import com.hsu.edu_service.entity.vo.frontVo.CourseFrontVo;
+import com.hsu.edu_service.entity.vo.frontVo.CourseWebVo;
 import com.hsu.edu_service.mapper.EduCourseMapper;
 import com.hsu.edu_service.service.EduChapterService;
 import com.hsu.edu_service.service.EduCourseDescriptionService;
@@ -12,9 +17,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hsu.edu_service.service.EduVideoService;
 import com.hsu.servicebase.exceptionhandler.SummerException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -109,5 +119,71 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if(delete == 0) {
             throw new SummerException(20001, "删除课程失败");
         }
+    }
+
+    @Cacheable(value = "hotCourse", key = "'hotCourseList'")
+    @Override
+    public List<EduCourse> getHotCourse() {
+        QueryWrapper<EduCourse> wrapperCourse = new QueryWrapper<>();
+        wrapperCourse.orderByDesc("id");
+        wrapperCourse.last("limit 8");
+        List<EduCourse> courseList = baseMapper.selectList(wrapperCourse);
+        return courseList;
+    }
+
+
+    //=======================================================前端用户service============================================
+    // 前端带分页的条件查询
+    @Override
+    public Map<String, Object> getCourseFrontList(Page<EduCourse> coursePage, CourseFrontVo courseFrontVo) {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        // 是否有一级分类
+        if (!StringUtils.isEmpty(courseFrontVo.getSubjectParentId())) {
+            wrapper.eq("subject_parent_id", courseFrontVo.getSubjectParentId());
+        }
+
+        // 是否有二级分类
+        if (!StringUtils.isEmpty(courseFrontVo.getSubjectId())){
+            wrapper.eq("subject_id", courseFrontVo.getSubjectId());
+        }
+
+        // 是否有时间条件
+        if (!StringUtils.isEmpty(courseFrontVo.getGmtCreateSort())) {
+            wrapper.orderByDesc("gmt_create");
+        }
+
+        // 是否有关注度条件
+        if (!StringUtils.isEmpty(courseFrontVo.getBuyCountSort())){
+            wrapper.orderByDesc("buy_count");
+        }
+        // 是否有价格条件
+        if (!StringUtils.isEmpty(courseFrontVo.getPriceSort())){
+            wrapper.orderByDesc("price");
+        }
+        baseMapper.selectPage(coursePage, wrapper);
+
+        List<EduCourse> courses = coursePage.getRecords();
+        long currentPage = coursePage.getCurrent();
+        long pages = coursePage.getPages();
+        long size = coursePage.getSize();
+        long total = coursePage.getTotal();
+        boolean hasNext = coursePage.hasNext();
+        boolean hasPrevious = coursePage.hasPrevious();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", courses);
+        map.put("current", currentPage);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        return map;
+    }
+
+    @Override
+    public CourseWebVo getFrontCourseInfo(String courseId) {
+        CourseWebVo courseInfo = baseMapper.getFrontCourseInfo(courseId);
+        return courseInfo;
     }
 }

@@ -4,7 +4,7 @@ import com.hsu.commonutils.R;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+// 熔断器出错熔断后显示return中的信息
 @Component
 public class VodClientImpl implements VodClient{
     @Override

@@ -7,4 +7,5 @@ import lombok.Data;
 public class SubChapterVideo {
     private String id;
     private String title;
+    private String videoSourceId;
 }

@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @MapperScan("com.hsu.edu_service.mapper")
-@ComponentScan(basePackages = {"com.hsu"})
+@ComponentScan(basePackages = {"com.hsu"}) // 组件扫描
 @SpringBootApplication
 @EnableDiscoveryClient   // nacos注册
 @EnableFeignClients      // 服务调用注解
