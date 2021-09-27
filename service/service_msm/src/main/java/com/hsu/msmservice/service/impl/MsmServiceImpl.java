@@ -23,7 +23,7 @@ public class MsmServiceImpl implements MsmService {
         if(StringUtils.isEmpty(phoneNumber)) return false;
 
 
-        Credential cred = new Credential("AKIDJSKxJPEn56qKYVBajbCWZMs76pHSSBdo", "vay4tSkX4QWLtABwQdaGfnfGaeRxCArH");//自己的腾讯key
+        Credential cred = new Credential("", "");//自己的腾讯key
 
         HttpProfile httpProfile = new HttpProfile();
         httpProfile.setEndpoint("sms.tencentcloudapi.com");
