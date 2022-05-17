@@ -14,8 +14,8 @@ import java.util.List;
 
 public class TestVod {
     public static void main(String[] args) throws ClientException {
-        String accessKeyId = "LTAI5tHcpNbmsxW5M6RViN5B";
-        String accessKeySecret = "vlm7GZvRTjrts5NLY5oyk48UILYhbV";
+        String accessKeyId = "id";
+        String accessKeySecret = "miyao";
 
         String title = "测试上传视频";
         String fileName = "D:/projectVideo.mp4";
